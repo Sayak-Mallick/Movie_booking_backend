@@ -1,11 +1,16 @@
-import app from "./src/server.js";
-import {config} from "./src/config/config.js";
+import './src/server';
+import app from './src/server';
+import { config } from './src/config/config'
+import connectDB from "./src/config/db";
 
-const startServer = () => {
-    const PORT = config.port
-    app.listen(PORT, () => {
-        console.log(`Server is running on port http://localhost:${PORT}`);
-    });
+const startServer = async () => {
+  await connectDB();
+  const PORT = config.PORT
+  app.listen(PORT, () => {
+    console.log(`Server is running on [http://localhost:${PORT}]`);
+  });
 }
 
 startServer();
+
+console.log('Root index file is executing.');
